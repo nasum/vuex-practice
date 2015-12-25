@@ -1,8 +1,15 @@
-var i = hoge;
+import Vue      from 'Vue';
+import TextForm from './components/TextForm.vue';
+import ToDoList from './components/ToDoList.vue';
+import store    from './store/';
 
-var func = function(){
-  console.log('hogehoge');
-  console.log('fugafuga');
+window.onload = function(){
+  var main = new Vue({
+    el: "body",
+    data: store.state,
+    components: {
+      "text-form": TextForm,
+      "to-do-list": ToDoList
+    }
+  })
 }
-
-func();

@@ -1,4 +1,6 @@
 var gulp       = require('gulp');
+var util       = require('gulp-util');
+var duration   = require('gulp-duration');
 var browserify = require('browserify');
 var watchify   = require('watchify');
 var vueify     = require('vueify');
@@ -19,13 +21,15 @@ function compile(){
 
   bundler = watchify(browserify(opts));
   bundler.transform(vueify)
-         .transform(babelify)
+         .transform(babelify, {presets: ["es2015"]})
 
   bundler.on('update', bundle);
   bundle();
 
   function bundle(){
     return bundler.bundle()
+      .on('error', util.log)
+      .pipe(duration("compiled"))
       .pipe(source('index.js'))
       .pipe(gulp.dest('src/'));
   }
