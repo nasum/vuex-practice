@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 const state = {
   input: "",
-  todos: ["a","b","c"]
+  todos: []
 }
 
 export default new Vuex.Store({
